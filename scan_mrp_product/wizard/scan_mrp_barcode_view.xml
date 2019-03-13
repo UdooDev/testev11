@@ -9,6 +9,8 @@
 					<field name="serial"/>
 				</group>
 				<footer>
+					<button string="Scan" type="object" name="scan" class="oe_highlight"/>
+					or
 					<button string="Cancel" special="cancel"/>
 				</footer>
 			</form>

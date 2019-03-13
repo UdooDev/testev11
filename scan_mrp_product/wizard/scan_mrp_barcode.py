@@ -11,8 +11,9 @@ class WizardMRPSerial(models.TransientModel):
 
 	serial = fields.Char(required=True, string='Barcode')
 	
-	@api.onchange('serial')
-	def onchange_serial(self):
+	@api.multi
+	def scan(self):
+		self.ensure_one()
 		#search mrp
 		if self.serial:
 			mrp = self.env['mrp.production'].search([('name', '=', self.serial)])
