@@ -4,7 +4,7 @@
 		<field name="name">Scan Barcode</field>
 		<field name="model">wizard.mrp.scan.dev.serial</field>
 		<field name="arch" type="xml">
-			<form string="Scan Barcode" version="11.0">
+			<form string="Scan Barcode" version="11.0" options="{'keycodes': {13: 'scan'}}">
 				<group>
 					<field name="serial"/>
 				</group>
