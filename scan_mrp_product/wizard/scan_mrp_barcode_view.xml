@@ -4,13 +4,11 @@
 		<field name="name">Scan Barcode</field>
 		<field name="model">wizard.mrp.scan.dev.serial</field>
 		<field name="arch" type="xml">
-			<form string="Scan Barcode" version="11.0" options="{'keycodes': {13: 'scan'}}">
+			<form string="Scan Barcode" version="11.0">
 				<group>
-					<field name="serial"/>
+					<field name="_barcode_scanned" widget="barcode_handler"/>
 				</group>
 				<footer>
-					<button string="Scan" type="object" name="scan" class="oe_highlight"/>
-					or
 					<button string="Cancel" special="cancel"/>
 				</footer>
 			</form>

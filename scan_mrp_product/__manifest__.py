@@ -6,7 +6,7 @@
     "description": "",
     "website": "",
     "depends": [
-        "mrp", "stock"
+        "mrp", "stock","barcodes"
     ],
     "data": [
 		"wizard/scan_mrp_barcode_view.xml",

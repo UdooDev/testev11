@@ -7,16 +7,15 @@ _logger = logging.getLogger(__name__)
 
 class WizardMRPSerial(models.TransientModel):
 	_name = 'wizard.mrp.scan.dev.serial'
+	_inherit = 'barcodes.barcode_events_mixin'
 	_description = 'Scan ProductSerial'
-
-	serial = fields.Char(required=True, string='Barcode')
 	
-	@api.multi
-	def scan(self):
+	
+	def on_barcode_scanned(self, barcode):
 		self.ensure_one()
 		#search mrp
-		if self.serial:
-			mrp = self.env['mrp.production'].search([('name', '=', self.serial)])
+		if barcode:
+			mrp = self.env['mrp.production'].search([('name', '=', barcode)])
 			if mrp:
 				action = self.env.ref('mrp.mrp_production_action').read()[0]
 				action['views'] = [(self.env.ref('mrp.mrp_production_form_view').id, 'form')]
