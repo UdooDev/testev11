@@ -21,7 +21,7 @@ class WizardProductSerial(models.TransientModel):
 			move_line = self.mrp_id.move_raw_ids.filtered(lambda r: r.product_id.id == product.id)
 			all_scanned = self.mrp_id.move_raw_ids.filtered(lambda r: r.barcode_scan == False)
 			
-			raise UserError(""+str(move_line)+" " +str(not all_scanned) + " " + str(all_scanned) + " " + str(product))
+			
 			_logger.info('>>>>>>>>>> found %s', move_line)
 			_logger.info('>>>>>>>>>> all scanned %s', not all_scanned)
 			_logger.info('>>>>>>>>>> all scanned %s', all_scanned)
