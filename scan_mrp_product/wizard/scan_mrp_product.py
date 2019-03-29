@@ -20,13 +20,14 @@ class WizardProductSerial(models.TransientModel):
 			
 			move_line = self.mrp_id.move_raw_ids.filtered(lambda r: r.product_id.id == product.id)
 			all_scanned = self.mrp_id.move_raw_ids.filtered(lambda r: r.barcode_scan == False)
-			if move_line:
+			
+			if not all_scanned:
+				raise UserError("All Product Scanned")
+			elif move_line:
 				move_line[0].write({
 					'reserved_availability': move_line.product_uom_qty,
 					'barcode_scan': True
 				})
-			elif not all_scanned:
-				raise UserError("All Product Scanned")
 			else:
 				raise UserError("Product doesn't exist")
 			#referesh 
