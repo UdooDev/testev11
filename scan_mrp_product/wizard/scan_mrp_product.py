@@ -23,7 +23,6 @@ class WizardProductSerial(models.TransientModel):
 			
 			
 			_logger.info('>>>>>>>>>> found %s', move_line)
-			_logger.info('>>>>>>>>>> all scanned %s', not all_scanned)
 			_logger.info('>>>>>>>>>> all scanned %s', all_scanned)
 			_logger.info('>>>>>>>>>> product %s', product)
 			if not all_scanned:
