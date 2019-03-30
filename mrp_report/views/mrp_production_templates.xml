@@ -151,7 +151,7 @@
                                     <span t-if="o.state == 'done'" t-field="line2.duration"/>
                                 </td>
 								<td>
-									<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', line2.name +'/'+str(line2.workcenter_id.id)+'/'+str(line2.production_id.id), 600, 100)" style="width:300px;height:50px" class="pull-right mb16"/>
+									<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', str(line2.workcenter_id.id)+'/'+str(line2.production_id.id), 600, 100)" style="width:300px;height:50px" class="pull-right mb16"/>
 								</td>
                             </tr>
                         </table>
