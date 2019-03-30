@@ -30,9 +30,6 @@ class WizardProductSerial(models.TransientModel):
 						'barcode_scan': True,
 						'state': 'assigned',
 					})
-				all_scanned = self.mrp_id.move_raw_ids.filtered(lambda r: r.barcode_scan == True)
-				if all_scanned:
-					self.mrp_id.action_assign()
 			else:
 				raise UserError("Product doesn't exist")
 			#referesh 
