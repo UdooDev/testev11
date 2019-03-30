@@ -14,6 +14,7 @@ class WizardMRPSerial(models.TransientModel):
 	def on_barcode_scanned(self, barcode):
 		self.ensure_one()
 		#search mrp
+		raise UserError("Events Received " + barcode)
 		if barcode:
 			mrp = self.env['mrp.production'].search([('name', '=', barcode)])
 			if mrp:
