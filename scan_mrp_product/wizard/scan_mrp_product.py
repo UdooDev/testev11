@@ -27,8 +27,12 @@ class WizardProductSerial(models.TransientModel):
 				if not move_line[0].barcode_scan:
 					self.env['stock.move.line'].create(move_line[0]._prepare_move_line_vals(quantity=move_line[0].product_uom_qty))
 					move_line[0].write({
-						'barcode_scan': True
+						'barcode_scan': True,
+						'state': 'assigned',
 					})
+				all_scanned = self.mrp_id.move_raw_ids.filtered(lambda r: r.barcode_scan == True)
+				if all_scanned:
+					self.action_assign()
 			else:
 				raise UserError("Product doesn't exist")
 			#referesh 
