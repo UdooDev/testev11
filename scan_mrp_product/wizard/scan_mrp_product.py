@@ -29,7 +29,8 @@ class WizardProductSerial(models.TransientModel):
 				raise UserError("All Product Scanned")
 			elif move_line:
 				move_line[0].write({
-					'reserved_availability': move_line.product_uom_qty,
+					#'reserved_availability': move_line.product_uom_qty,
+					'quantity_done': move_line.product_uom_qty,
 					'barcode_scan': True
 				})
 			else:
