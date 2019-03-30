@@ -23,14 +23,15 @@ class WizardProductSerial(models.TransientModel):
 			
 			
 			_logger.info('>>>>>>>>>> found %s', move_line)
+			_logger.info('>>>>>>>>>> found %s', move_line.product_uom_qty)
 			_logger.info('>>>>>>>>>> all scanned %s', all_scanned)
 			_logger.info('>>>>>>>>>> product %s', product)
 			if not all_scanned:
 				raise UserError("All Product Scanned")
 			elif move_line:
 				move_line[0].write({
-					#'reserved_availability': move_line.product_uom_qty,
-					'quantity_done': move_line.product_uom_qty,
+					'reserved_availability': move_line[0].product_uom_qty,
+					'quantity_done': move_line[0].product_uom_qty,
 					'barcode_scan': True
 				})
 			else:
