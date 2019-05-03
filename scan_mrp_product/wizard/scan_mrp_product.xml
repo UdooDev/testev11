@@ -6,7 +6,7 @@
 		<field name="arch" type="xml">
 			<form string="Scan Serials" version="11.0">
 				<group>
-					<field name="serial"/>
+					<field name="serial" class="barcode-serial" widget="BarcodeSerial"/>
 					<field name="mrp_id" invisible="1"/>
 				</group>
 				<footer>

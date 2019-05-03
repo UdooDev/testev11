@@ -12,7 +12,7 @@ class WizardProductSerial(models.TransientModel):
 	serial = fields.Char(required=True, string='Barcode')
 	mrp_id = fields.Many2one('mrp.production')
 	
-	@api.onchange('serial')
+	#@api.onchange('serial')
 	def onchange_serial(self):
 		if self.serial:
 			#search for serial in stock.production.lot
@@ -30,6 +30,31 @@ class WizardProductSerial(models.TransientModel):
 						'barcode_scan': True,
 						'state': 'assigned',
 					})
+			else:
+				raise UserError("Product doesn't exist")
+			#referesh 
+			self.serial = ''
+
+	@api.multi
+	def scanbarcode_serial(self, barcode):
+		print("==========barcode======",barcode)
+		if barcode:
+			#search for serial in stock.production.lot
+			product = self.env['product.product'].search([('barcode', '=', barcode)])
+			
+			move_line = self.mrp_id.move_raw_ids.filtered(lambda r: r.product_id.id == product.id)
+			all_scanned = self.mrp_id.move_raw_ids.filtered(lambda r: r.barcode_scan == False)
+			
+			if not all_scanned:
+				raise UserError("All Product Scanned")
+			elif move_line:
+				if not move_line[0].barcode_scan:
+					self.env['stock.move.line'].create(move_line[0]._prepare_move_line_vals(quantity=move_line[0].product_uom_qty))
+					move_line[0].write({
+						'barcode_scan': True,
+						'state': 'assigned',
+					})
+					return True
 			else:
 				raise UserError("Product doesn't exist")
 			#referesh 

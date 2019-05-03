@@ -12,6 +12,7 @@
 		"wizard/scan_mrp_barcode_view.xml",
 		"wizard/scan_mrp_product.xml",
 		"views/mrp_view.xml",
+        "views/template.xml"
     ],
     "installable": True,
 }
